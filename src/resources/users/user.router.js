@@ -1,30 +1,30 @@
-const { getUsers, getUser, postUser,putUser,deleteUser} = require('./user.controllers');
+const { getUsers, getUser, postUser, putUser, deleteUser } = require('./user.controllers');
 
 async function router(fastify) {
 
-  const itemUserSchemeShow = {
-    type: 'object',
-    properties: {
-      id: { type: 'string' },
-      name: { type: 'string' },
-      login: { type: 'string' }
-    }
-  };
-  const itemUserSchemePost = {
-    type: 'object',
-    properties: {
-      name: { type: 'string' },
-      login: { type: 'string' },
-      password: { type: 'string' }
-    }
-  };
+  const itemUserScheme = ({
+    id = true,
+    name = true,
+    login = true,
+    password = false
+  } = {}) => {
+    const obj = {
+      type: "object",
+      properties: {}
+    };
+    if (id) obj.properties.id = { type: 'string' };
+    if (name) obj.properties.name = { type: 'string' };
+    if (login) obj.properties.login = { type: 'string' };
+    if (password) obj.properties.password = { type: 'string' };
+    return obj;
+  }
 
   const getUsersScheme = {
     schema: {
       response: {
         200: {
           type: 'array',
-          items: itemUserSchemeShow
+          items: itemUserScheme()
         }
       }
     },
@@ -33,7 +33,7 @@ async function router(fastify) {
   const getUserByIdScheme = {
     schema: {
       response: {
-        200: itemUserSchemeShow
+        200: itemUserScheme()
       }
     },
     handler: getUser
@@ -41,7 +41,7 @@ async function router(fastify) {
   const postUserScheme = {
     schema: {
       body: {
-        ...itemUserSchemePost,
+        ...(itemUserScheme({ id: false, password: true })),
         additionalProperties: false,
         required: [
           'name',
@@ -50,7 +50,7 @@ async function router(fastify) {
         ],
       },
       response: {
-        201: itemUserSchemeShow
+        201: itemUserScheme()
       }
     },
     handler: postUser
@@ -58,7 +58,7 @@ async function router(fastify) {
   const putUserScheme = {
     schema: {
       body: {
-        ...itemUserSchemePost,
+        ...(itemUserScheme({ id: false, password: true })),
         additionalProperties: false,
         required: [
           'name',
@@ -67,7 +67,7 @@ async function router(fastify) {
         ],
       },
       response: {
-        200: itemUserSchemeShow
+        200: itemUserScheme()
       }
     },
     handler: putUser
@@ -78,8 +78,8 @@ async function router(fastify) {
       response: {
         200: {
           type: 'object',
-          properties:{
-            message: {type: 'string'}
+          properties: {
+            message: { type: 'string' }
           }
         }
       }

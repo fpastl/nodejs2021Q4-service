@@ -1,29 +1,28 @@
-const { getBoards, getBoard, postBoard,putBoard,deleteBoard} = require('./board.controllers');
+const { getBoards, getBoard, postBoard, putBoard, deleteBoard } = require('./board.controllers');
 
 async function router(fastify) {
 
-  const itemBoardSchemeShow = {
-    type: 'object',
-    properties: {
-      id: { type: 'string' },
-      title: { type: 'string' },
-      columns : { type: 'array' },
+  const itemBoardScheme = ({
+    id = true,
+    title = true,
+    columns = true
+  } = {}) => {
+    const obj = {
+      type: 'object',
+      properties: {}
     }
-  };
-  const itemBoardSchemePost = {
-    type: 'object',
-    properties: {
-        title: { type: 'string' },
-        columns : { type: 'array' },
-    }
-  };
+    if (id) obj.properties.id = { type: 'string' };
+    if (title) obj.properties.title = { type: 'string' };
+    if (columns) obj.properties.columns = { type: 'array' };
+    return obj;
+  }
 
   const getBoardsScheme = {
     schema: {
       response: {
         200: {
           type: 'array',
-          items: itemBoardSchemeShow
+          items: itemBoardScheme()
         }
       }
     },
@@ -32,7 +31,7 @@ async function router(fastify) {
   const getBoardByIdScheme = {
     schema: {
       response: {
-        200: itemBoardSchemeShow
+        200: itemBoardScheme()
       }
     },
     handler: getBoard
@@ -40,14 +39,14 @@ async function router(fastify) {
   const postBoardScheme = {
     schema: {
       body: {
-        ...itemBoardSchemePost,
+        ...(itemBoardScheme({ id: false })),
         additionalProperties: false,
         required: [
           'title',
         ],
       },
       response: {
-        201: itemBoardSchemeShow
+        201: itemBoardScheme()
       }
     },
     handler: postBoard
@@ -55,14 +54,14 @@ async function router(fastify) {
   const putBoardScheme = {
     schema: {
       body: {
-        ...itemBoardSchemePost,
+        ...(itemBoardScheme({ id: false })),
         additionalProperties: false,
         required: [
           'title',
         ],
       },
       response: {
-        200: itemBoardSchemeShow
+        200: itemBoardScheme()
       }
     },
     handler: putBoard
@@ -73,8 +72,8 @@ async function router(fastify) {
       response: {
         200: {
           type: 'object',
-          properties:{
-            message: {type: 'string'}
+          properties: {
+            message: { type: 'string' }
           }
         }
       }
