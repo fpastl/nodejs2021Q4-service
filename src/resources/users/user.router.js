@@ -1,4 +1,5 @@
 const { getUsers, getUser, postUser, putUser, deleteUser } = require('./user.controllers');
+const { getAllScheme, getOneScheme, deleteScheme } = require('../../constants/scheme');
 
 async function router(fastify) {
 
@@ -19,25 +20,6 @@ async function router(fastify) {
     return obj;
   }
 
-  const getUsersScheme = {
-    schema: {
-      response: {
-        200: {
-          type: 'array',
-          items: itemUserScheme()
-        }
-      }
-    },
-    handler: getUsers
-  };
-  const getUserByIdScheme = {
-    schema: {
-      response: {
-        200: itemUserScheme()
-      }
-    },
-    handler: getUser
-  };
   const postUserScheme = {
     schema: {
       body: {
@@ -55,6 +37,7 @@ async function router(fastify) {
     },
     handler: postUser
   };
+
   const putUserScheme = {
     schema: {
       body: {
@@ -73,25 +56,11 @@ async function router(fastify) {
     handler: putUser
   };
 
-  const deleteUserScheme = {
-    schema: {
-      response: {
-        200: {
-          type: 'object',
-          properties: {
-            message: { type: 'string' }
-          }
-        }
-      }
-    },
-    handler: deleteUser
-  };
-
-  fastify.get('/users', getUsersScheme);
-  fastify.get('/users/:id', getUserByIdScheme);
+  fastify.get('/users', getAllScheme(itemUserScheme(), getUsers));
+  fastify.get('/users/:id', getOneScheme(itemUserScheme(), getUser));
   fastify.post('/users', postUserScheme);
   fastify.put('/users/:id', putUserScheme);
-  fastify.delete('/users/:id', deleteUserScheme);
+  fastify.delete('/users/:id', deleteScheme(deleteUser));
 };
 
 module.exports = router;

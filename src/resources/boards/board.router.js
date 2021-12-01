@@ -1,4 +1,5 @@
 const { getBoards, getBoard, postBoard, putBoard, deleteBoard } = require('./board.controllers');
+const { getAllScheme, getOneScheme, deleteScheme } = require('../../constants/scheme');
 
 async function router(fastify) {
 
@@ -17,25 +18,6 @@ async function router(fastify) {
     return obj;
   }
 
-  const getBoardsScheme = {
-    schema: {
-      response: {
-        200: {
-          type: 'array',
-          items: itemBoardScheme()
-        }
-      }
-    },
-    handler: getBoards
-  };
-  const getBoardByIdScheme = {
-    schema: {
-      response: {
-        200: itemBoardScheme()
-      }
-    },
-    handler: getBoard
-  };
   const postBoardScheme = {
     schema: {
       body: {
@@ -67,25 +49,11 @@ async function router(fastify) {
     handler: putBoard
   };
 
-  const deleteBoardScheme = {
-    schema: {
-      response: {
-        200: {
-          type: 'object',
-          properties: {
-            message: { type: 'string' }
-          }
-        }
-      }
-    },
-    handler: deleteBoard
-  };
-
-  fastify.get('/boards', getBoardsScheme);
-  fastify.get('/boards/:id', getBoardByIdScheme);
+  fastify.get('/boards', getAllScheme(itemBoardScheme(), getBoards));
+  fastify.get('/boards/:id', getOneScheme(itemBoardScheme(), getBoard));
   fastify.post('/boards', postBoardScheme);
   fastify.put('/boards/:id', putBoardScheme);
-  fastify.delete('/boards/:id', deleteBoardScheme);
+  fastify.delete('/boards/:id', deleteScheme(deleteBoard));
 };
 
 module.exports = router;
