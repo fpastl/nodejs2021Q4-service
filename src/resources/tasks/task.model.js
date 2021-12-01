@@ -1,6 +1,6 @@
 const uuid = require('uuid');
 
-class Column {
+class Task {
     constructor(
         {
             id = uuid.v4(),
@@ -21,10 +21,10 @@ class Column {
         this.columnId = columnId;
     }
 
-    static toResponse(column) {
-        const { id, title, order, description, userId, columnId } = column;
-        return { id, title, order, description, userId, columnId };
+    static toResponse(task) {
+        const { id, title, order, description, userId, columnId, boardId } = task;
+        return { id, title, order, description, userId, columnId, boardId };
     }
 }
 
-module.exports = Column;
+module.exports = Task;

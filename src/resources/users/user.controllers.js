@@ -1,5 +1,6 @@
 const User = require('./user.model');
 const usersService = require('./user.service');
+const {clearTasksUser} = require('../tasks/task.controllers');
 
 let users = usersService.getAll();
 
@@ -30,6 +31,7 @@ const putUser = async (req, res) => {
 const deleteUser = async (req, res) => {
     const { id } = req.params;
     users = (await users).filter(user => user.id !== id);
+    await clearTasksUser(id);
     res.send({ message: `item ${id} has been removed` });
 }
 

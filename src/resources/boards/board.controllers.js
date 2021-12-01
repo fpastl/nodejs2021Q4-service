@@ -1,5 +1,6 @@
 const Board = require('./board.model');
 const boardsService = require('./board.service');
+const {deleteBoardsTasks} = require('../tasks/task.controllers');
 
 let boards = boardsService.getAll();
 
@@ -8,6 +9,7 @@ const getBoards = async (req, res) => res.send((await boards).map(Board.toRespon
 const getBoard = async (req, res) => {
     const { id } = req.params;
     const item = (await boards).find(board => board.id === id);
+    if(!item) res.code(404).send({message: `board ${id} not found`});
     res.send(item);
 };
 
@@ -28,6 +30,7 @@ const putBoard = async (req, res) => {
 
 const deleteBoard = async (req, res) => {
     const { id } = req.params;
+    await deleteBoardsTasks(id);
     boards = (await boards).filter(board => board.id !== id);
     res.send({ message: `item ${id} has been removed` });
 }
