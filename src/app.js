@@ -1,8 +1,7 @@
 const app = require('fastify')({logger: true});
 const usersRout = require('./resources/users/user.router');
+const boardsRout = require('./resources/boards/board.router');
 
-// eslint-disable-next-line no-unused-vars
-app.get('/', async (req, res) => "'Service is running!'");
 app.register(require('fastify-swagger'),{
     exposeRoute: true,
     routePrefix: '/docs',
@@ -12,6 +11,7 @@ app.register(require('fastify-swagger'),{
 });
 
 app.register(usersRout);
+app.register(boardsRout);
 
 module.exports = app;
 
