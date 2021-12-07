@@ -1,3 +1,5 @@
+import routeHandler from "./types";
+
 const messageObj = {
     type: 'object',
     properties: {
@@ -5,7 +7,7 @@ const messageObj = {
     }
 };
 
-const getAllScheme = (items, handler) => ({
+const getAllScheme = (items: object, handler: routeHandler) => ({
     schema: {
         response: {
             200: {
@@ -16,15 +18,16 @@ const getAllScheme = (items, handler) => ({
     },
     handler
 });
-const getOneScheme = (item, handler) => ({
+const getOneScheme = (item: object, handler: routeHandler) => ({
     schema: {
         response: {
-            200: item
+            200: item,
+            404: messageObj
         }
     },
     handler
 });
-const deleteScheme = (handler) => ({
+const deleteScheme = (handler: routeHandler) => ({
     schema: {
         response: {
             200: messageObj,
