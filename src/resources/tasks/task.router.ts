@@ -1,17 +1,23 @@
-const { getTasks, getTask, postTask, putTask, deleteTask } = require('./task.controllers');
-const { getAllScheme, getOneScheme, deleteScheme } = require('../../constants/scheme');
+import { FastifyPluginAsync } from "fastify";
+import { getTasks, getTask, postTask, putTask, deleteTask } from './task.controllers';
+import { getAllScheme, getOneScheme, deleteScheme } from '../../constants/scheme';
+import { taskInterfaceSchemeProperties } from "../../constants/types";
 
-async function router(fastify) {
+const router: FastifyPluginAsync = async function (fastify) {
 
-    const itemTaskScheme = ({ id = true
-        , boardId = true
-        , title = true
-        , order = true
-        , description = true
-        , taskId = true
-        , columnId = true
-        , userId = true } = {}) => {
-        const taskScheme = {
+    const itemTaskScheme = ({
+        id = true,
+        boardId = true,
+        title = true,
+        order = true,
+        description = true,
+        taskId = true,
+        columnId = true,
+        userId = true } = {}) => {
+        const taskScheme: {
+            type: string,
+            properties: taskInterfaceSchemeProperties
+        } = {
             type: 'object',
             properties: {}
         };
@@ -20,7 +26,6 @@ async function router(fastify) {
         if (title) taskScheme.properties.title = { type: 'string' };
         if (order) taskScheme.properties.order = { type: 'number' };
         if (description) taskScheme.properties.description = { type: 'string' };
-        if (taskId) taskScheme.properties.taskId = { type: 'string' };
         if (columnId) taskScheme.properties.columnId = { type: ['string', 'null'] };
         if (userId) taskScheme.properties.userId = { type: ['string', 'null'] };
         return taskScheme;
@@ -68,4 +73,4 @@ async function router(fastify) {
     fastify.delete('/boards/:boardId/tasks/:taskId', deleteScheme(deleteTask));
 };
 
-module.exports = router;
+export default router;
