@@ -4,6 +4,7 @@
         "removeComments": true,
         "outDir": "./js",
         "sourceMap": true,
+        "noImplicitAny": true,
         "strict": true
     },
     "include": [
