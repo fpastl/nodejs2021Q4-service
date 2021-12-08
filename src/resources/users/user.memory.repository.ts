@@ -3,4 +3,4 @@ const getAll = async () =>
    []
 ;
 
-module.exports = { getAll };
+export default getAll;

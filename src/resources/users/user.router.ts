@@ -1,7 +1,9 @@
-const { getUsers, getUser, postUser, putUser, deleteUser } = require('./user.controllers');
-const { getAllScheme, getOneScheme, deleteScheme } = require('../../constants/scheme');
+import { FastifyPluginAsync } from "fastify";
+import { userInterfaceSchemeProperties } from "../../constants/types";
+import { getUsers, getUser, postUser, putUser, deleteUser }from './user.controllers';
+import { getAllScheme, getOneScheme, deleteScheme } from '../../constants/scheme';
 
-async function router(fastify) {
+const router: FastifyPluginAsync = async function (fastify) {
 
   const itemUserScheme = ({
     id = true,
@@ -9,7 +11,10 @@ async function router(fastify) {
     login = true,
     password = false
   } = {}) => {
-    const obj = {
+    const obj:{
+      type:string,
+      properties:userInterfaceSchemeProperties
+    } = {
       type: "object",
       properties: {}
     };

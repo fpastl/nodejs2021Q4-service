@@ -7,7 +7,7 @@ const messageObj = {
     }
 };
 
-const getAllScheme = (items: object, handler: routeHandler) => ({
+export const getAllScheme = (items: object, handler: routeHandler) => ({
     schema: {
         response: {
             200: {
@@ -18,7 +18,7 @@ const getAllScheme = (items: object, handler: routeHandler) => ({
     },
     handler
 });
-const getOneScheme = (item: object, handler: routeHandler) => ({
+export const getOneScheme = (item: object, handler: routeHandler) => ({
     schema: {
         response: {
             200: item,
@@ -27,7 +27,7 @@ const getOneScheme = (item: object, handler: routeHandler) => ({
     },
     handler
 });
-const deleteScheme = (handler: routeHandler) => ({
+export const deleteScheme = (handler: routeHandler) => ({
     schema: {
         response: {
             200: messageObj,
@@ -36,9 +36,3 @@ const deleteScheme = (handler: routeHandler) => ({
     },
     handler
 });
-
-module.exports = {
-    getAllScheme,
-    getOneScheme,
-    deleteScheme,
-};
