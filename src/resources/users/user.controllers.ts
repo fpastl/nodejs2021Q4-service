@@ -1,8 +1,8 @@
 import User from './user.model';
 import routeHandler, { userInterface } from "../../constants/types";
 import getAll from './user.service';
-const { clearTasksUser } = require('../tasks/task.controllers');
 import { notFound, removed } from '../../constants/messages';
+import { clearTasksUser } from '../tasks/task.controllers';
 
 let users: Promise<User[]> | User[] = getAll();
 type userParams = { id: string };

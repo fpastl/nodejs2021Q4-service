@@ -1,7 +1,5 @@
-import { Config } from "prettier";
-
-const dotenv = require('dotenv');
-const path = require('path');
+import dotenv = require('dotenv');
+import path = require('path');
 
 dotenv.config({
   path: path.join(__dirname, '../../.env')

@@ -2,7 +2,9 @@ import { v4 } from 'uuid';
 
 export default class Board {
     id: string;
+
     title: string;
+
     columns: string[];
 
     constructor(

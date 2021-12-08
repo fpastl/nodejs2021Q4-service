@@ -3,7 +3,7 @@ import { userInterfaceSchemeProperties } from "../../constants/types";
 import { getUsers, getUser, postUser, putUser, deleteUser }from './user.controllers';
 import { getAllScheme, getOneScheme, deleteScheme } from '../../constants/scheme';
 
-const router: FastifyPluginAsync = async function (fastify) {
+const router: FastifyPluginAsync = async (fastify) => {
 
   const itemUserScheme = ({
     id = true,
@@ -68,4 +68,4 @@ const router: FastifyPluginAsync = async function (fastify) {
   fastify.delete('/users/:id', deleteScheme(deleteUser));
 };
 
-module.exports = router;
+export default router;

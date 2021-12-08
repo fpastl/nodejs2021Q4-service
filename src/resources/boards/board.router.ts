@@ -3,7 +3,7 @@ import { boardInterfaceSchemeProperties } from "../../constants/types";
 import { getBoards, getBoard, postBoard, putBoard, deleteBoard } from './board.controllers';
 import { getAllScheme, getOneScheme, deleteScheme } from '../../constants/scheme';
 
-const router: FastifyPluginAsync = async function (fastify) {
+const router: FastifyPluginAsync = async (fastify) => {
 
   const itemBoardScheme = ({
     id = true,
@@ -61,4 +61,4 @@ const router: FastifyPluginAsync = async function (fastify) {
   fastify.delete('/boards/:id', deleteScheme(deleteBoard));
 };
 
-module.exports = router;
+export default router;

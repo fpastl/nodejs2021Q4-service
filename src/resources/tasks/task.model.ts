@@ -2,12 +2,19 @@ import { v4 } from 'uuid';
 
 export default class Task {
     id: string;
+
     title: string | undefined;
+
     order: number | undefined;
+
     description: string | undefined;
+
     userId: string | undefined | null;
+
     boardId: string;
+
     columnId: string | undefined;
+
     constructor(
         {
             id = v4(),

@@ -14,11 +14,20 @@
     }
   },
   "settings": {
-    "noInlineConfig": true
+    "noInlineConfig": true,
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".ts",
+          ".tsx"
+        ]
+      }
+    }
   },
   "extends": [
     "eslint:recommended",
     "plugin:node/recommended",
+    "plugin:@typescript-eslint/recommended",
     "airbnb-base",
     "prettier"
   ],
@@ -27,7 +36,19 @@
     "linebreak-style": "off",
     "node/no-unsupported-features/es-syntax": "off",
     "no-underscore-dangle": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error"
+    ],
     "import/prefer-default-export": "off",
-    "no-explicit-any": "on"
+    "node/no-missing-import": [
+      "error",
+      {
+        "tryExtensions": [
+          ".ts",
+          ".tsx"
+        ]
+      }
+    ]
   }
 }

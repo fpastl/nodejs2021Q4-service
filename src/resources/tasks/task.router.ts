@@ -3,7 +3,7 @@ import { getTasks, getTask, postTask, putTask, deleteTask } from './task.control
 import { getAllScheme, getOneScheme, deleteScheme } from '../../constants/scheme';
 import { taskInterfaceSchemeProperties } from "../../constants/types";
 
-const router: FastifyPluginAsync = async function (fastify) {
+const router: FastifyPluginAsync = async (fastify) => {
 
     const itemTaskScheme = ({
         id = true,
@@ -11,7 +11,6 @@ const router: FastifyPluginAsync = async function (fastify) {
         title = true,
         order = true,
         description = true,
-        taskId = true,
         columnId = true,
         userId = true } = {}) => {
         const taskScheme: {

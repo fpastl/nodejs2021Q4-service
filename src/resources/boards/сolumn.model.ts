@@ -2,8 +2,11 @@ import { v4 } from 'uuid';
 
 export default class Column {
     id: string;
+
     title: string;
+
     order: number;
+
     constructor(
         {
             id = v4(),
