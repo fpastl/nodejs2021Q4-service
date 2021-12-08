@@ -15,5 +15,4 @@ app.register(usersRout);
 app.register(boardsRout);
 app.register(tasksRout);
 
-module.exports = app;
-
+export default app;
