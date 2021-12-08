@@ -17,7 +17,7 @@ export const getTasks: routeHandler = async (req, res) => {
 export const getTask: routeHandler = async (req, res) => {
     const { taskId } = req.params as taskIdParam;
     const item = (await tasks).find(task => task.id === taskId);
-    if (!item) res.code(404).send(notFound('task', taskId as string));
+    if (!item) res.code(404).send(notFound('task', taskId));
     res.send(item);
 };
 

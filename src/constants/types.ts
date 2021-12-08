@@ -35,6 +35,18 @@ export interface taskInterfaceSchemeProperties {
     columnId?: SchemePropertie;
 }
 
+export interface boardInterface{
+    id?: string;
+    title: string;
+    columns: string[];
+}
+
+export interface boardInterfaceSchemeProperties{
+    id?: SchemePropertie;
+    title?: SchemePropertie;
+    columns?: SchemePropertie;
+}
+
 interface SchemePropertie {
     type: string | string[]
 }

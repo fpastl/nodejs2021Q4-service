@@ -1,14 +1,19 @@
-const { getBoards, getBoard, postBoard, putBoard, deleteBoard } = require('./board.controllers');
-const { getAllScheme, getOneScheme, deleteScheme } = require('../../constants/scheme');
+import { FastifyPluginAsync } from "fastify";
+import { boardInterfaceSchemeProperties } from "../../constants/types";
+import { getBoards, getBoard, postBoard, putBoard, deleteBoard } from './board.controllers';
+import { getAllScheme, getOneScheme, deleteScheme } from '../../constants/scheme';
 
-async function router(fastify) {
+const router: FastifyPluginAsync = async function (fastify) {
 
   const itemBoardScheme = ({
     id = true,
     title = true,
     columns = true
   } = {}) => {
-    const obj = {
+    const obj: {
+      type: string,
+      properties: boardInterfaceSchemeProperties
+    } = {
       type: 'object',
       properties: {}
     }
