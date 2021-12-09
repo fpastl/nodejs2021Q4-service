@@ -1,13 +1,13 @@
-import {v4} from 'uuid';
+import { v4 } from 'uuid';
 
 class User {
-  id:string;
+  id: string;
 
-  name:string;
+  name: string;
 
-  login:string;
+  login: string;
 
-  password:string;
+  password: string;
 
   constructor({
     id = v4(),
@@ -21,7 +21,12 @@ class User {
     this.password = password;
   }
 
-  static toResponse(user:{id:string,name:string,login:string}) {
+  /**
+   * Return fields of class User 
+   * @param task class User object 
+   * @returns class with User fields 
+   */
+  static toResponse(user: { id: string, name: string, login: string }) {
     const { id, name, login } = user;
     return { id, name, login };
   }

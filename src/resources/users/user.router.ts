@@ -1,19 +1,28 @@
 import { FastifyPluginAsync } from "fastify";
 import { userInterfaceSchemeProperties } from "../../constants/types";
-import { getUsers, getUser, postUser, putUser, deleteUser }from './user.controllers';
+import { getUsers, getUser, postUser, putUser, deleteUser } from './user.controllers';
 import { getAllScheme, getOneScheme, deleteScheme } from '../../constants/scheme';
 
+/**
+ * Manages routes for user
+ * @param fastify is the encapsulated Fastify instance
+ */
 const router: FastifyPluginAsync = async (fastify) => {
 
+  /**
+   * generates an user object template with the required fields
+   * @param param0 object with options(user object fields to display(true) or not display(false)) 
+   * @returns object to use inside fastify fluent schema
+   */
   const itemUserScheme = ({
     id = true,
     name = true,
     login = true,
     password = false
   } = {}) => {
-    const obj:{
-      type:string,
-      properties:userInterfaceSchemeProperties
+    const obj: {
+      type: string,
+      properties: userInterfaceSchemeProperties
     } = {
       type: "object",
       properties: {}

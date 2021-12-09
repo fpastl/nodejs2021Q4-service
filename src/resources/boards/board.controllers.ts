@@ -15,7 +15,7 @@ type boardParams = { id: string };
 export const getBoards: routeHandler = async (_req, res) => res.send((await boards).map(Board.toResponse));
 
 /**
- * Send response if xist board with received id - with Board; else - reports failure
+ * Send response if exist Board with received id - with Board; else - reports failure
  * @param req request object with information about request
  * @param res reply object to send a response 
  */
@@ -38,7 +38,7 @@ export const postBoard: routeHandler = async (req, res) => {
 };
 
 /**
- * if exist board with received id - Rewrite object board and send this object; else - reports failure
+ * if exist Board with received id - Rewrite object Board and send this object; else - reports failure
  * @param req request object with information about request
  * @param res reply object to send a response 
  */
@@ -55,7 +55,7 @@ export const putBoard: routeHandler = async (req, res) => {
 };
 
 /**
- * delete object board with received id from array
+ * delete object Board with received id from array
  * @param req request object with information about request
  * @param res reply object to send a response 
  */
