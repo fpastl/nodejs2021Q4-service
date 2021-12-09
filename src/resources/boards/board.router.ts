@@ -9,6 +9,11 @@ import { getAllScheme, getOneScheme, deleteScheme } from '../../constants/scheme
  */
 const router: FastifyPluginAsync = async (fastify) => {
 
+  /**
+   * generates an board object template with the required fields
+   * @param param0 object with options(board object fields to display(true) or not display(false)) 
+   * @returns object to use inside fastify fluent schema
+   */
   const itemBoardScheme = ({
     id = true,
     title = true,

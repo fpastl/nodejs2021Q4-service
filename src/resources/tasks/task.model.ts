@@ -35,6 +35,11 @@ export default class Task {
         this.columnId = columnId;
     }
 
+    /**
+     * Return fields of class Task 
+     * @param task class Task object 
+     * @returns class with Task fields 
+     */
     static toResponse(task: Task) {
         const { id, title, order, description, userId, columnId, boardId } = task;
         return { id, title, order, description, userId, columnId, boardId };

@@ -3,8 +3,17 @@ import { getTasks, getTask, postTask, putTask, deleteTask } from './task.control
 import { getAllScheme, getOneScheme, deleteScheme } from '../../constants/scheme';
 import { taskInterfaceSchemeProperties } from "../../constants/types";
 
+/**
+ * Manages routes for task
+ * @param fastify is the encapsulated Fastify instance
+ */
 const router: FastifyPluginAsync = async (fastify) => {
 
+      /**
+   * generates an task object template with the required fields
+   * @param param0 object with options(task object fields to display(true) or not display(false)) 
+   * @returns object to use inside fastify fluent schema
+   */
     const itemTaskScheme = ({
         id = true,
         boardId = true,
