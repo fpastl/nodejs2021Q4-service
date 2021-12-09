@@ -19,6 +19,11 @@ export default class Board {
         this.columns = columns;
     }
 
+    /**
+     * Return fields of class Board 
+     * @param board class Board object 
+     * @returns class with Board fields 
+     */
     static toResponse(board: Board) {
         const { id, title, columns } = board;
         return { id, title, columns };

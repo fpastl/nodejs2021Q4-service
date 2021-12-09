@@ -19,6 +19,11 @@ export default class Column {
         this.order = order;
     }
 
+    /**
+     * Return fields of class Column 
+     * @param column class Column object 
+     * @returns class with Column fields 
+     */
     static toResponse(column:Column) {
         const { id, title, order } = column;
         return { id, title, order };

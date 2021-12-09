@@ -16,12 +16,7 @@
   "settings": {
     "noInlineConfig": true,
     "import/resolver": {
-      "node": {
-        "extensions": [
-          ".ts",
-          ".tsx"
-        ]
-      }
+      "typescript": {}
     }
   },
   "extends": [

@@ -3,6 +3,10 @@ import { boardInterfaceSchemeProperties } from "../../constants/types";
 import { getBoards, getBoard, postBoard, putBoard, deleteBoard } from './board.controllers';
 import { getAllScheme, getOneScheme, deleteScheme } from '../../constants/scheme';
 
+/**
+ * Manages routes for board
+ * @param fastify is the encapsulated Fastify instance
+ */
 const router: FastifyPluginAsync = async (fastify) => {
 
   const itemBoardScheme = ({
